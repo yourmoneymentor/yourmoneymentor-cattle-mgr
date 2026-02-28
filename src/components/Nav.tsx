@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cx } from "@/lib/utils";
 
 const items = [
-  { href: "/dashboard", label: "Dashboard" },
+  { href: "/", label: "Home" },
   { href: "/cattle", label: "Cattle" },
   { href: "/feedings", label: "Feed" },
   { href: "/tasks", label: "Tasks" },

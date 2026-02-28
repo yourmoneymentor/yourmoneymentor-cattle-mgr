@@ -10,6 +10,7 @@ const eslintConfig = defineConfig([
       // These rules are overly strict for this app’s simple client-side data fetching.
       "react-hooks/set-state-in-effect": "off",
       "react-hooks/purity": "off",
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
   // Override default ignores of eslint-config-next.
