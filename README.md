@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cattle Manager (mobile-first)
 
-## Getting Started
+Production: https://cattle-mgr.vercel.app
 
-First, run the development server:
+## What it does
+A simple phone-friendly app for a farmer managing ~50 head of cattle.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Feeding management: quick daily entries
+- Health & vaccinations: per-animal logs + next-due dates (alerts on Dashboard)
+- Weight & growth: per-animal weight chart + simple sale readiness estimate
+- Sales: record sales, auto-marks animal sold + adds finance income entry
+- Tasks: daily/weekly tasks with checkboxes
+- Finance: costs/income entries + profit trend chart
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup (Supabase)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1) Create Supabase project
+- Create a new project in Supabase.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2) Create tables + RLS
+- In Supabase → SQL Editor, run: `supabase/schema.sql`
 
-## Learn More
+### 3) Enable Auth
+- Supabase → Authentication → Providers → enable Email.
+- Magic link is fine.
 
-To learn more about Next.js, take a look at the following resources:
+### 4) Add env vars in Vercel
+In Vercel → Project → Settings → Environment Variables:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Redeploy after setting them.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Farmer instructions (daily use)
 
-## Deploy on Vercel
+1) Open the app: https://cattle-mgr.vercel.app
+2) Tap **Log in** and enter your email.
+3) From **Dashboard**:
+   - Tap **+ Feeding** to log today’s feed
+   - Tap **Cattle** → **+ Add** to add an animal
+4) For each animal:
+   - Add **weights** over time to get the growth chart + readiness estimate
+   - Log **vaccinations/treatments** and set **Next due** for alerts
+5) Use **Tasks** for daily/weekly checklists
+6) Use **Sales** to record sales (it will mark the animal sold)
+7) Use **Finance** to track feed/vet/fuel costs and sale income
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+- Reminders/notifications: the app highlights due items on the Dashboard (true push notifications can be added later).
